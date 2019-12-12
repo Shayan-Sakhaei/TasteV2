@@ -7,13 +7,13 @@
     tools:context=".view.MainActivity">
 
     <EditText
-        android:gravity="center"
         android:id="@+id/etSearch"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
+        android:gravity="center"
         android:hint="@string/search"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toStartOf="@+id/etLimit"
@@ -22,12 +22,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:gravity="center"
         android:id="@+id/etLimit"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
+        android:gravity="center"
         android:hint="@string/limit"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +38,7 @@
         android:id="@+id/radioGroup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:checkedButton="@id/rbMovies"
@@ -49,26 +49,30 @@
 
         <RadioButton
             android:id="@+id/rbMovies"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/movies" />
 
         <RadioButton
             android:id="@+id/rbMusic"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/music" />
 
         <RadioButton
             android:id="@+id/rbGames"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/games" />
 
         <RadioButton
             android:id="@+id/rbMixed"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/mixed" />
 
     </RadioGroup>

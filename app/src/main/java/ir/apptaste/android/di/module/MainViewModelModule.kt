@@ -9,7 +9,7 @@ import ir.apptaste.android.view_model.MainViewModel
 import ir.apptaste.android.view_model.MainViewModelFactory
 
 @Module
-class MainViewModelModule {
+object MainViewModelModule {
 
     @Provides
     fun provideMainViewModel(

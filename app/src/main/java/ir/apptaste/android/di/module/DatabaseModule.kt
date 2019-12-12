@@ -8,7 +8,7 @@ import ir.apptaste.android.model.persistence.AppDatabase
 import ir.apptaste.android.model.persistence.ResultDao
 
 @Module
-class DatabaseModule {
+object DatabaseModule {
 
     @Provides
     fun provideDatabase(application: Application): AppDatabase {

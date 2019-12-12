@@ -7,7 +7,9 @@ import ir.apptaste.android.di.module.DatabaseModule
 import ir.apptaste.android.di.module.NetworkModule
 import ir.apptaste.android.model.api.TasteWebService
 import ir.apptaste.android.model.persistence.ResultDao
+import javax.inject.Singleton
 
+@Singleton
 @Component(
     modules = [NetworkModule::class,
         DatabaseModule::class]
@@ -21,7 +23,8 @@ interface AppComponent {
     interface Builder {
 
         @BindsInstance
-        fun application(application: Application): Builder
+        fun application(application: Application):
+                Builder
 
         fun build(): AppComponent
     }

@@ -32,9 +32,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var mAdapter: ResultListAdapter
 
     @Inject
-    lateinit var viewModelFactory: MainViewModelFactory
-
-    @Inject
     lateinit var mViewModel: MainViewModel
 
 

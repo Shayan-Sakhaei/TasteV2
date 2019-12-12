@@ -3,11 +3,18 @@ package ir.apptaste.android.di
 import dagger.BindsInstance
 import dagger.Component
 import ir.apptaste.android.di.module.MainViewModelModule
+import ir.apptaste.android.di.scope.MainActivityScope
 import ir.apptaste.android.view.MainActivity
+import ir.apptaste.android.view_model.MainViewModel
 
-@Component(modules = [MainViewModelModule::class],
-    dependencies = [AppComponent::class])
+@MainActivityScope
+@Component(
+    modules = [MainViewModelModule::class],
+    dependencies = [AppComponent::class]
+)
 interface MainActivityComponent {
+
+    fun provideMainViewModel(): MainViewModel
 
     fun inject(mainActivity: MainActivity)
 
