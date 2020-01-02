@@ -1,8 +1,8 @@
 package ir.apptaste.android
 
 import android.app.Application
-import ir.apptaste.android.di.AppComponent
-import ir.apptaste.android.di.DaggerAppComponent
+import ir.apptaste.android.di.component.AppComponent
+import ir.apptaste.android.di.component.DaggerAppComponent
 
 class App : Application() {
 

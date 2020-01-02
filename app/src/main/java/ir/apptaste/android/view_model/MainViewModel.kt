@@ -18,10 +18,8 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
     private val resultList = MutableLiveData<ArrayList<ResultResponse>>()
     private val resultListError = MutableLiveData<Boolean>()
     private val resultListLoading = MutableLiveData<Boolean>()
+    private var mSelectedResultResponse: ResultResponse? = null
 
-    fun getResultList(): LiveData<ArrayList<ResultResponse>> {
-        return resultList
-    }
 
     fun getResultListError(): LiveData<Boolean> {
         return resultListError
@@ -51,6 +49,18 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
                     resultListError.value = true
                 }
             })
+    }
+
+    fun getResultList(): LiveData<ArrayList<ResultResponse>> {
+        return resultList
+    }
+
+    fun setSelectedResultResponse(selectedResultResponse: ResultResponse) {
+        mSelectedResultResponse = selectedResultResponse
+    }
+
+    fun getSelectedResultResponse():ResultResponse? {
+        return mSelectedResultResponse
     }
 
     override fun onCleared() {
