@@ -11,7 +11,6 @@ import ir.apptaste.android.view.fragment.ResultFragment
 @Component(modules = [ResultFragmentModule::class], dependencies = [AppComponent::class])
 interface ResultFragmentComponent {
 
-    fun provideResultListAdapter(): ResultListAdapter
     fun inject(resultFragment: ResultFragment)
 
     @Component.Builder

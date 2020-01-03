@@ -11,14 +11,21 @@ import io.reactivex.schedulers.Schedulers
 import ir.apptaste.android.model.Repository
 import ir.apptaste.android.model.api.ApiResponse
 import ir.apptaste.android.model.api.ResultResponse
+import ir.apptaste.android.model.persistence.ResultDao
+import ir.apptaste.android.utility.mapper.ResultServerEntityMapper
+import javax.inject.Inject
 
-class MainViewModel(private val repository: Repository) : ViewModel() {
+class MainViewModel(private val repository: Repository, private val resultDao: ResultDao) :
+    ViewModel() {
 
     private val disposable = CompositeDisposable()
     private val resultList = MutableLiveData<ArrayList<ResultResponse>>()
     private val resultListError = MutableLiveData<Boolean>()
     private val resultListLoading = MutableLiveData<Boolean>()
     private var mSelectedResultResponse: ResultResponse? = null
+
+    @Inject
+    lateinit var mResultServerEntityMapper: ResultServerEntityMapper
 
 
     fun getResultListError(): LiveData<Boolean> {
@@ -30,6 +37,7 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
     }
 
     fun fetchResult(userQuery: String, userType: String, userLimit: String) {
+        resultListLoading.value = true
         repository.fetchResult(userQuery, userType, userLimit)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -38,6 +46,8 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
                     resultListLoading.value = false
                     resultList.value = response.similar.results
                     resultListError.value = false
+
+                    saveToDatabase(response.similar.results)
                 }
 
                 override fun onSubscribe(d: Disposable) {
@@ -51,6 +61,13 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
             })
     }
 
+    private fun saveToDatabase(results: ArrayList<ResultResponse>) {
+        results.forEach {
+            mResultServerEntityMapper.map(it)
+        }
+    }
+
+
     fun getResultList(): LiveData<ArrayList<ResultResponse>> {
         return resultList
     }
@@ -59,7 +76,7 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
         mSelectedResultResponse = selectedResultResponse
     }
 
-    fun getSelectedResultResponse():ResultResponse? {
+    fun getSelectedResultResponse(): ResultResponse? {
         return mSelectedResultResponse
     }
 

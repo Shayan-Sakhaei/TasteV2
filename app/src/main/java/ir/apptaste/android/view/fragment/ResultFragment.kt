@@ -16,6 +16,7 @@ import ir.apptaste.android.App
 import ir.apptaste.android.R
 import ir.apptaste.android.di.component.DaggerResultFragmentComponent
 import ir.apptaste.android.model.api.ResultResponse
+import ir.apptaste.android.model.persistence.ResultDao
 import ir.apptaste.android.view.adapter.ResultListAdapter
 import ir.apptaste.android.view_model.MainViewModel
 import ir.apptaste.android.view_model.MainViewModelFactory
@@ -28,6 +29,8 @@ class ResultFragment : Fragment() {
     lateinit var mMainViewModelFactory: MainViewModelFactory
     @Inject
     lateinit var mAdapter: ResultListAdapter
+    @Inject
+    lateinit var mResultDao: ResultDao
 
     private lateinit var mViewModel: MainViewModel
     private lateinit var rvResultList: RecyclerView

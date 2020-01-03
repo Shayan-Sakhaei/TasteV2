@@ -7,12 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "result_table")
 data class ResultEntity(
 
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "resultId")
-    val resultId: Int,
-
-    val infoCreatorId: Long,
-
+    @PrimaryKey
     @ColumnInfo(name = "name")
     val name: String,
 
