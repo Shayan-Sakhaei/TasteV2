@@ -1,4 +1,4 @@
-package ir.apptaste.android.di
+package ir.apptaste.android.di.component
 
 import android.app.Application
 import dagger.BindsInstance
