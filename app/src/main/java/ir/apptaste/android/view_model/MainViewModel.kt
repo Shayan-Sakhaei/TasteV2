@@ -8,6 +8,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import ir.apptaste.android.model.Optional
 import ir.apptaste.android.model.Repository
 import ir.apptaste.android.model.api.ApiResponse
 import ir.apptaste.android.model.api.ResultResponse
@@ -38,16 +39,23 @@ class MainViewModel(private val repository: Repository, private val resultDao: R
 
     fun fetchResult(userQuery: String, userType: String, userLimit: String) {
         resultListLoading.value = true
-        repository.fetchResult(userQuery, userType, userLimit)
+        repository.fetchAndSaveResult(userQuery, userType, userLimit)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : SingleObserver<ApiResponse> {
-                override fun onSuccess(response: ApiResponse) {
-                    resultListLoading.value = false
-                    resultList.value = response.similar.results
-                    resultListError.value = false
+            .subscribe(object : SingleObserver<Optional<ArrayList<ResultResponse>>> {
+                override fun onSuccess(response: Optional<ArrayList<ResultResponse>>) {
+                    when (response) {
+                        is Optional.Success -> {
+                            resultListLoading.value = false
+                            resultList.value = response.data
+                            resultListError.value = false
+                        }
+                        is Optional.Failed -> {
+                            resultListLoading.value = false
+                            resultListError.value = true
 
-                    saveToDatabase(response.similar.results)
+                        }
+                    }
                 }
 
                 override fun onSubscribe(d: Disposable) {
@@ -55,12 +63,14 @@ class MainViewModel(private val repository: Repository, private val resultDao: R
                 }
 
                 override fun onError(e: Throwable) {
-                    resultListLoading.value = false
-                    resultListError.value = true
+                    //no need to do anything
+                    // we already handled all error
+                    // but just in case anything happens we can log it
                 }
             })
     }
 
+    @Deprecated("no need")
     private fun saveToDatabase(results: ArrayList<ResultResponse>) {
         results.forEach {
             mResultServerEntityMapper.map(it)
