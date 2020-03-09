@@ -2,10 +2,11 @@ package ir.apptaste.android.di.component
 
 import dagger.BindsInstance
 import dagger.Component
+import ir.apptaste.android.di.scope.DetailFragmentScope
 import ir.apptaste.android.di.scope.ResultFragmentScope
 import ir.apptaste.android.view.fragment.DetailFragment
 
-@ResultFragmentScope
+@DetailFragmentScope
 @Component(dependencies = [AppComponent::class])
 interface DetailFragmentComponent {
 

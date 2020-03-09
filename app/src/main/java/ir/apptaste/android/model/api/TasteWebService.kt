@@ -10,6 +10,6 @@ interface TasteWebService {
     fun fetchResults(
         @Query("q") query: String,
         @Query("type") type: String,
-        @Query("li,it") limit: String
+        @Query("limit") limit: String
     ): Single<Response<ApiResponse>>
 }

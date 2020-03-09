@@ -16,7 +16,7 @@ import ir.apptaste.android.model.persistence.ResultDao
 import ir.apptaste.android.utility.mapper.ResultServerEntityMapper
 import javax.inject.Inject
 
-class MainViewModel(private val repository: Repository, private val resultDao: ResultDao) :
+class MainViewModel(private val repository: Repository) :
     ViewModel() {
 
     private val disposable = CompositeDisposable()
@@ -24,9 +24,6 @@ class MainViewModel(private val repository: Repository, private val resultDao: R
     private val resultListError = MutableLiveData<Boolean>()
     private val resultListLoading = MutableLiveData<Boolean>()
     private var mSelectedResultResponse: ResultResponse? = null
-
-    @Inject
-    lateinit var mResultServerEntityMapper: ResultServerEntityMapper
 
 
     fun getResultListError(): LiveData<Boolean> {
@@ -69,14 +66,6 @@ class MainViewModel(private val repository: Repository, private val resultDao: R
                 }
             })
     }
-
-    @Deprecated("no need")
-    private fun saveToDatabase(results: ArrayList<ResultResponse>) {
-        results.forEach {
-            mResultServerEntityMapper.map(it)
-        }
-    }
-
 
     fun getResultList(): LiveData<ArrayList<ResultResponse>> {
         return resultList
